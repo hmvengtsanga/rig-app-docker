@@ -1,1 +1,1 @@
-cd ../ && php bin/console doctrine:fixtures:load
+cd ../ && php bin/console doctrine:fixtures:load 
