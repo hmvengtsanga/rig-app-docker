@@ -1,0 +1,1 @@
+cd ../ && php bin/console make:migration
