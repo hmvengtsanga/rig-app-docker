@@ -16,4 +16,9 @@ RUN docker-php-ext-configure intl
 RUN docker-php-ext-install pdo pdo_mysql gd opcache intl zip calendar dom mbstring zip gd xsl
 RUN pecl install apcu && docker-php-ext-enable apcu
 
+#RUN usermod -u 1000 www-data
+#RUN usermod -G staff www-data
+#RUN chmod a+x *.sh
+RUN chown -R root:www-data /var/www/
+
 WORKDIR /var/www/
