@@ -16,13 +16,6 @@ RUN docker-php-ext-configure intl
 RUN docker-php-ext-install pdo pdo_mysql gd opcache intl zip calendar dom mbstring zip gd xsl
 RUN pecl install apcu && docker-php-ext-enable apcu
 
-#Rights
-ARG USER_ID
-ARG GROUP_ID
-
-RUN groupadd -f -g $GROUP_ID user
-RUN useradd -u $USER_ID -g $GROUP_ID user
-USER user
 # Set user and group of working directory
 #RUN chown -R user:alice /var/www/*
 
