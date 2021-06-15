@@ -16,11 +16,13 @@ RUN docker-php-ext-configure intl
 RUN docker-php-ext-install pdo pdo_mysql gd opcache intl zip calendar dom mbstring zip gd xsl
 RUN pecl install apcu && docker-php-ext-enable apcu
 
-#RUN usermod -u 1000 www-data
-#RUN usermod -G staff www-data
-#RUN chmod a+x *.sh
-RUN chmod -R 777 /var/www/
-#CMD ["bbb.sh"]
+#Rights
+ARG USER_ID
+ARG GROUP_ID
+
+RUN groupadd -f -g $GROUP_ID user
+RUN useradd -u $USER_ID -g $GROUP_ID user
+USER user
 
 
 WORKDIR /var/www/
