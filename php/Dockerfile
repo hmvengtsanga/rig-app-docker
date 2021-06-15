@@ -1,13 +1,5 @@
 FROM php:7.4-apache
 
-#Rights
-ARG USER_ID
-ARG GROUP_ID
-
-RUN groupadd -f -g $GROUP_ID user
-RUN useradd -u $USER_ID -g $GROUP_ID user
-USER user
-
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 RUN apt-get update \
@@ -23,6 +15,16 @@ RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-install pdo pdo_mysql gd opcache intl zip calendar dom mbstring zip gd xsl
 RUN pecl install apcu && docker-php-ext-enable apcu
+
+#Rights
+ARG USER_ID
+ARG GROUP_ID
+
+RUN groupadd -f -g $GROUP_ID user
+RUN useradd -u $USER_ID -g $GROUP_ID user
+USER user
+# Set user and group of working directory
+#RUN chown -R user:alice /var/www/*
 
 
 
