@@ -19,6 +19,8 @@ RUN pecl install apcu && docker-php-ext-enable apcu
 #RUN usermod -u 1000 www-data
 #RUN usermod -G staff www-data
 #RUN chmod a+x *.sh
-RUN chown -R root:www-data /var/www/
+RUN chmod -R 777 /var/www/
+#CMD ["bbb.sh"]
+
 
 WORKDIR /var/www/
