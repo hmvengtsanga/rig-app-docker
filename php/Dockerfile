@@ -1,12 +1,5 @@
 FROM php:7.4-apache
 
-#Rights
-ARG USER_ID
-ARG GROUP_ID
-
-RUN groupadd -f -g $GROUP_ID user
-RUN useradd -u $USER_ID -g $GROUP_ID user
-USER user
 
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
@@ -27,6 +20,19 @@ RUN pecl install apcu && docker-php-ext-enable apcu
 # Set user and group of working directory
 #RUN chown -R user:alice /var/www/*
 
+#Rights
+ARG USER_ID
+ARG GROUP_ID
+
+#RUN groupadd -f -g $GROUP_ID user
+#RUN useradd -u $USER_ID -g $GROUP_ID user
+#USER user
+# Add group and user based on build arguments
+RUN addgroup --gid ${GROUP_ID} devops
+RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} devops
+
+# Set user and group of working directory
+RUN chown -R devops:devops /var/www/rigole-api
 
 
 
