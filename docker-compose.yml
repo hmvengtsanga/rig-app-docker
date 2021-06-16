@@ -43,7 +43,7 @@ services:
                 GROUP_ID: ${GROUP_ID}
         container_name: api_rigole_docker
         ports:
-            - 8088:80
+            - 8082:80
         volumes:
             - ./php/vhosts:/etc/apache2/sites-enabled
             - ../www-api:/var/www

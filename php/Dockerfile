@@ -17,8 +17,6 @@ RUN docker-php-ext-configure intl
 RUN docker-php-ext-install pdo pdo_mysql gd opcache intl zip calendar dom mbstring zip gd xsl
 RUN pecl install apcu && docker-php-ext-enable apcu
 
-# Set user and group of working directory
-#RUN chown -R user:alice /var/www/*
 
 #Rights
 ARG USER_ID
@@ -27,14 +25,6 @@ ARG GROUP_ID
 RUN groupadd -f -g $GROUP_ID user
 RUN useradd -u $USER_ID -g $GROUP_ID user
 USER user
-# Add group and user based on build arguments
-#RUN addgroup --gid ${GROUP_ID} devops
-#RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} devops
-
-# Set user and group of working directory
-#RUN chown -R devops:devops /var/www/rigole-api
-RUN chmod -R 0555 /var/www/rigole-api/config/jwt
-
 
 
 WORKDIR /var/www/
