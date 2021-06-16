@@ -42,7 +42,6 @@ services:
                 USER_ID: ${USER_ID}
                 GROUP_ID: ${GROUP_ID}
         container_name: api_rigole_docker
-        #command: bash -c "sudo chmod -R 777 /var/www/*"
         ports:
             - 8088:80
         volumes:
